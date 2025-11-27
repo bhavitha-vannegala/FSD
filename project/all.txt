@@ -1,0 +1,236 @@
+3a)
+Source Code:
+export default function App() {
+  return (
+    <div style={{padding:20}}>
+      <h1>Hello React!</h1>
+      <p>Setup successful 🎉</p>
+    </div>
+  );
+}
+
+
+3b)
+Steps:
+1.	Install React Router: npm install react-router-dom
+2.	In src/index.js, wrap App with BrowserRouter.
+(Code for Wrap App: replace index.js content with below code:
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);
+
+reportWebVitals();
+
+3.	Create src/pages/Home.js, About.js, Contact.js with basic headings.
+Code for Home.js:
+import React from "react";
+function Home() {
+    return (
+        <div className="container">
+            <h1>Welcome to My React App</h1>
+            <p>
+                This is the Home Page. Explore React basics!
+            </p>
+        </div>
+    );
+}
+
+export default Home;
+
+	Code for About.js:
+import React from "react";
+function About() {
+    return (
+        <div className="container">
+            <h1>Welcome to About Page</h1>
+            <p>
+                This is the About Page. Explore React basics!
+            </p>
+        </div>
+    );
+}
+
+export default About;
+	Code for Contact.js:
+import React from "react";
+
+function Contact() {
+    return (
+        <div className="container">
+            <h1>Contact Us</h1>
+            <p>Email: myemail@mydomain.com</p>
+            <p>Mobile: 9191919191</p>
+            <p>You can contact us from any of above options</p>
+        </div>
+    );
+}
+
+export default Contact;
+
+4.	In src/App.js, import Routes, Route, Link from react-router-dom. (Code is below)
+5.	Add navigation links and define routes for Home, About, Contact.
+6.	Run npm start and verify navigation.
+Source Code:
+import { Routes, Route, Link } from "react-router-dom";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+export default function App() {
+  return (
+    <div>
+      <nav>
+        <Link to="/">Home</Link> | 
+        <Link to="/about">About</Link> | 
+        <Link to="/contact">Contact</Link>
+      </nav>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </div>
+  );
+}
+
+3c)
+
+RegistrationForm.js:
+import React, { useState } from "react";
+
+export default function RegistrationForm() {
+  const [form, setForm] = useState({ name: "", email: "" });
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    alert(`Name: ${form.name}\nEmail: ${form.email}`);
+  }
+
+  return (
+    <div style={{ padding: 20 }}>
+      <h2>Registration Form</h2>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Name:{" "}
+          <input
+            type="text"
+            name="name"
+            value={form.name}
+            onChange={handleChange}
+            placeholder="Enter your name"
+            required
+          />
+        </label>
+        <br /><br />
+        <label>
+          Email:{" "}
+          <input
+            type="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            placeholder="Enter your email"
+            required
+          />
+        </label>
+        <br /><br />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  );
+}
+App.js:
+import React from "react";
+import RegistrationForm from "./components/RegistrationForm";
+
+export default function App() {
+  return (
+    <div>
+      <h1>React Form Example</h1>
+      <RegistrationForm />
+    </div>
+  );
+}
+3e)
+PostsList.js:
+import { useState, useEffect } from "react";
+import axios from "axios";
+
+export default function PostsList() {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    axios.get("https://jsonplaceholder.typicode.com/posts?_limit=5")
+      .then(res => setPosts(res.data))
+      .catch(err => console.error(err));
+  }, []);
+
+  return (
+    <div>
+      <h3>Posts</h3>
+      <ul>
+        {posts.map(p => <li key={p.id}><b>{p.title}</b></li>)}
+      </ul>
+    </div>
+  );
+}
+App.js:
+import React from "react";
+import PostsList from "./components/PostsList";
+
+export default function App() {
+  return (
+    <div>
+      <h1>React Axios Data Fetch Example</h1>
+      <PostsList />
+    </div>
+  );
+}
+4a)
+Source Code:
+// File: StudentDemo.java
+
+class Student {
+    String name;
+    int age;
+
+    // Method to set student details
+    void setDetails(String n, int a) {
+        name = n;
+        age = a;
+    }
+
+    // Method to display student details
+    void displayDetails() {
+        System.out.println("Name: " + name + ", Age: " + age);
+    }
+}
+
+public class StudentDemo {
+    public static void main(String[] args) {
+        // Create objects of Student class
+        Student s1 = new Student();
+        Student s2 = new Student();
+
+        // Set and display details
+        s1.setDetails("Praneel", 22);
+        s2.setDetails("Uday", 23);
+
+        s1.displayDetails();
+        s2.displayDetails();
+    }
+}
